@@ -1,0 +1,46 @@
+from flask import*
+import requests
+import json
+
+app=Flask(__name__)
+@app.route("/news",methods=['GET'])
+
+def news():
+     
+    
+    query_params = {
+      "source": "bbc-news",
+      "sortBy": "top",
+      "apiKey": "4dbc17e007ab436fb66416009dfb59a8"
+    }
+    main_url = " https://newsapi.org/v1/articles"
+ 
+    
+    res = requests.get(main_url, params=query_params)
+    open_bbc_page = res.json()
+ 
+    
+    article = open_bbc_page["articles"]
+ 
+    
+    results = []
+     
+    for ar in article:
+        results.append(ar["title"])
+         
+    for i in range(len(results)):
+         
+        # printing all trending news
+        return results[i]
+        
+
+            
+         
+    
+
+
+if __name__ == '__main__':
+     
+   
+    app.run()
+    
